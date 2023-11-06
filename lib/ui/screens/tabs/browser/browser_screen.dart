@@ -72,10 +72,10 @@ class _MyHomePageState extends State<BrowserScreen> {
               'assets/images/Documentary.jpeg',
               'assets/images/Drama.jpeg',
               'assets/images/Family.jpeg',
-              'assets/images/Music.jpeg',
+              'assets/images/Fantasy.jpeg',
               'assets/images/History.jpeg',
               'assets/images/Horror.jpeg',
-              'assets/images/Fantasy.jpeg',
+              'assets/images/Music.jpeg',
               'assets/images/Mystery.jpeg',
               'assets/images/Romance.jpeg',
               'assets/images/Science Fiction.jpeg',
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<BrowserScreen> {
               'assets/images/Western.jpeg',
             ];
             return Padding(
-              padding: const EdgeInsets.only(left: 5, bottom: 8, right: 5),
+              padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
               child: GridTile(
                 child: Stack(
                   children: [
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<BrowserScreen> {
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                             vertical: 5, horizontal: 10),
-                        width: 300,
+                        width: 180,
                         height: 170,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
