@@ -13,7 +13,6 @@ class GenreMoviesResponses {
       });
     }
   }
-
   List<Genres>? genres;
 
   Map<String, dynamic> toJson() {
@@ -38,7 +37,6 @@ class Genres {
     id = json['id'];
     name = json['name'];
   }
-
   int? id;
   String? name;
 
@@ -48,4 +46,5 @@ class Genres {
     map['name'] = name;
     return map;
   }
+
 }

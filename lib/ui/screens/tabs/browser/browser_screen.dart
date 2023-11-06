@@ -85,7 +85,7 @@ class _MyHomePageState extends State<BrowserScreen> {
               'assets/images/Western.jpeg',
             ];
             return Padding(
-              padding: const EdgeInsets.only(left: 5, bottom: 4, right: 5),
+              padding: const EdgeInsets.only(left: 5, bottom: 8, right: 5),
               child: GridTile(
                 child: Stack(
                   children: [
@@ -95,9 +95,9 @@ class _MyHomePageState extends State<BrowserScreen> {
                       },
                       child: Container(
                         margin: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 15),
+                            vertical: 5, horizontal: 10),
                         width: 300,
-                        height: 130,
+                        height: 170,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
@@ -110,19 +110,19 @@ class _MyHomePageState extends State<BrowserScreen> {
                       ),
                     ),
                     Positioned(
-                        top: 13,
+                        top: 5,
                         bottom: 0,
                         left: 7,
                         right: 7,
                         child: ClipRRect(
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                             child: Container(
                               child: Center(
                                 child: Text(
                                   genres[index]['name'],
                                   style: const TextStyle(
-                                      fontSize: 22,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),

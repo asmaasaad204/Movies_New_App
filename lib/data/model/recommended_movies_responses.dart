@@ -17,7 +17,6 @@ class RecommendedMoviesResponses {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
   int? page;
   List<ResultsRec>? results;
   int? totalPages;
@@ -69,7 +68,6 @@ class ResultsRec {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -103,4 +101,5 @@ class ResultsRec {
     map['vote_count'] = voteCount;
     return map;
   }
+
 }

@@ -12,7 +12,7 @@ class SimilarMovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    id = ModalRoute.of(context)!.settings.arguments as String;
+   id = ModalRoute.of(context)!.settings.arguments as String;
 
     return FutureBuilder(
       future: OnlineDataSources.getSimilarMovies(id),

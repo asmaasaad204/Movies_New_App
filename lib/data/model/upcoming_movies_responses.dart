@@ -19,7 +19,6 @@ class UpcomingMoviesResponses {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
   Dates? dates;
   int? page;
   List<ResultsUp>? results;
@@ -75,7 +74,6 @@ class ResultsUp {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
@@ -121,7 +119,6 @@ class Dates {
     maximum = json['maximum'];
     minimum = json['minimum'];
   }
-
   String? maximum;
   String? minimum;
 
@@ -131,4 +128,5 @@ class Dates {
     map['minimum'] = minimum;
     return map;
   }
+
 }

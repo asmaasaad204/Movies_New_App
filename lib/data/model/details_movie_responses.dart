@@ -74,7 +74,6 @@ class DetailsMovieResponses {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   dynamic belongsToCollection;
@@ -155,7 +154,6 @@ class SpokenLanguages {
     iso6391 = json['iso_639_1'];
     name = json['name'];
   }
-
   String? englishName;
   String? iso6391;
   String? name;
@@ -179,7 +177,6 @@ class ProductionCountries {
     iso31661 = json['iso_3166_1'];
     name = json['name'];
   }
-
   String? iso31661;
   String? name;
 
@@ -205,7 +202,6 @@ class ProductionCompanies {
     name = json['name'];
     originCountry = json['origin_country'];
   }
-
   int? id;
   dynamic logoPath;
   String? name;
@@ -231,7 +227,6 @@ class Genres {
     id = json['id'];
     name = json['name'];
   }
-
   int? id;
   String? name;
 

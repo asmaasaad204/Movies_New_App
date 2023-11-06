@@ -17,7 +17,6 @@ class PopularMoviesResponses {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
-
   int? page;
   List<ResultsPop>? results;
   int? totalPages;
@@ -69,7 +68,6 @@ class ResultsPop {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
