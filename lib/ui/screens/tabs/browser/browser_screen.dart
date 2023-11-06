@@ -1,7 +1,8 @@
+import 'dart:convert';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class BrowserScreen extends StatefulWidget {
   static const routeName = "Browser Screen";
@@ -109,20 +110,20 @@ class _MyHomePageState extends State<BrowserScreen> {
                       ),
                     ),
                     Positioned(
-                        top: 35,
+                        top: 13,
                         bottom: 0,
                         left: 1,
                         right: 10,
                         child: ClipRRect(
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
                             child: Container(
                               child: Center(
                                 child: Text(
                                   genres[index]['name'],
                                   style: const TextStyle(
                                       fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w900,
                                       color: Colors.white),
                                 ),
                               ),
