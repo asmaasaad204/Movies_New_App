@@ -112,8 +112,8 @@ class _MyHomePageState extends State<BrowserScreen> {
                     Positioned(
                         top: 13,
                         bottom: 0,
-                        left: 1,
-                        right: 10,
+                        left: 7,
+                        right: 7,
                         child: ClipRRect(
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<BrowserScreen> {
                                   genres[index]['name'],
                                   style: const TextStyle(
                                       fontSize: 22,
-                                      fontWeight: FontWeight.w900,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
                               ),
