@@ -122,7 +122,7 @@ class _MyHomePageState extends State<BrowserScreen> {
                                 child: Text(
                                   genres[index]['name'],
                                   style: const TextStyle(
-                                      fontSize: 24,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
