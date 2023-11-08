@@ -4,6 +4,7 @@ import 'package:app_new_movies/ui/screens/tabs/search/search_screen.dart';
 import 'package:app_new_movies/ui/screens/tabs/watchlist/watch_list_screen.dart';
 import 'package:flutter/material.dart';
 
+
 class HomeScreen extends StatefulWidget {
   static const routeName = "Home Screen";
 
@@ -14,27 +15,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> tabs = [
-    Home(),
-    const SearchScreen(),
-    const BrowserScreen(),
-    const WatchListScreen()
-  ];
+
+  List<Widget> tabs = [Home(), const SearchScreen(), const BrowserScreen(), const WatchListScreen()];
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 18, 19, 18),
-      bottomNavigationBar: buildBottomNavBar(),
+      bottomNavigationBar:buildBottomNavBar(),
       body: tabs[currentIndex],
     );
   }
 
-  Widget buildBottomNavBar() {
+  Widget buildBottomNavBar()
+  {
     return Theme(
-      data: Theme.of(context)
-          .copyWith(canvasColor: const Color.fromARGB(255, 26, 26, 26)),
+      data: Theme.of(context).copyWith(canvasColor: const Color.fromARGB(255, 26, 26, 26)),
       child: BottomNavigationBar(
           onTap: (index) {
             setState(() {
@@ -43,12 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           currentIndex: currentIndex,
           selectedItemColor: const Color.fromRGBO(253, 174, 26, 1.0),
+          showUnselectedLabels: true,
+          iconSize: 25,
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: const TextStyle(fontSize: 14),
+          unselectedLabelStyle: const TextStyle(fontSize: 14),
+          unselectedItemColor: Colors.white,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-            BottomNavigationBarItem(icon: Icon(Icons.movie), label: "Browser"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.video_library_sharp), label: "WatchList"),
+            BottomNavigationBarItem(icon: Icon(Icons.movie), label: "Browse"),
+            BottomNavigationBarItem(icon: Icon(Icons.video_library_sharp), label: "WatchList"),
           ]),
     );
   }
