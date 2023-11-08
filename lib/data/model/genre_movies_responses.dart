@@ -1,19 +1,19 @@
 /// genres : [{"id":28,"name":"Action"},{"id":12,"name":"Adventure"},{"id":16,"name":"Animation"},{"id":35,"name":"Comedy"},{"id":80,"name":"Crime"},{"id":99,"name":"Documentary"},{"id":18,"name":"Drama"},{"id":10751,"name":"Family"},{"id":14,"name":"Fantasy"},{"id":36,"name":"History"},{"id":27,"name":"Horror"},{"id":10402,"name":"Music"},{"id":9648,"name":"Mystery"},{"id":10749,"name":"Romance"},{"id":878,"name":"Science Fiction"},{"id":10770,"name":"TV Movie"},{"id":53,"name":"Thriller"},{"id":10752,"name":"War"},{"id":37,"name":"Western"}]
 
-class GenreMoviesResponses {
-  GenreMoviesResponses({
+class GenresMovieListResponses {
+  GenresMovieListResponses({
     this.genres,
   });
 
-  GenreMoviesResponses.fromJson(dynamic json) {
+  GenresMovieListResponses.fromJson(dynamic json) {
     if (json['genres'] != null) {
       genres = [];
       json['genres'].forEach((v) {
-        genres?.add(Genres.fromJson(v));
+        genres?.add(MovieGenres.fromJson(v));
       });
     }
   }
-  List<Genres>? genres;
+  List<MovieGenres>? genres;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -27,13 +27,13 @@ class GenreMoviesResponses {
 /// id : 28
 /// name : "Action"
 
-class Genres {
-  Genres({
+class MovieGenres {
+  MovieGenres({
     this.id,
     this.name,
   });
 
-  Genres.fromJson(dynamic json) {
+  MovieGenres.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
   }
@@ -46,5 +46,4 @@ class Genres {
     map['name'] = name;
     return map;
   }
-
 }
