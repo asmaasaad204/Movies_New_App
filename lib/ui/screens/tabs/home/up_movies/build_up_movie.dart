@@ -1,22 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../data/model/upcoming_movies_responses.dart';
 import '../../../../widgets/loadeing_widget.dart';
 import '../../../details_screen/datails_screen.dart';
 
-class BuildUpMovie extends StatelessWidget {
+class BuildUpMovie extends StatefulWidget {
   ResultsUp resultsUp;
 
   BuildUpMovie({super.key, required this.resultsUp});
 
+  @override
+  State<BuildUpMovie> createState() => _BuildUpMovieState();
+}
+
+class _BuildUpMovieState extends State<BuildUpMovie> {
   String baseUrl = "https://image.tmdb.org/t/p/w500";
+  String urlM = "assets/images/bookmark.png";
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, DetailsScreen.routeName,
-            arguments: resultsUp.id.toString());
+            arguments: widget.resultsUp.id.toString());
       },
       child: Column(
         children: [
@@ -31,9 +38,9 @@ class BuildUpMovie extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                     child: Stack(children: [
                       CachedNetworkImage(
-                        imageUrl: "$baseUrl${resultsUp.posterPath}",
-                        height: MediaQuery.of(context).size.height * .19,
-                        width: MediaQuery.of(context).size.width * .28,
+                        imageUrl: "$baseUrl${widget.resultsUp.posterPath}",
+                        height: MediaQuery.of(context).size.height * .175,
+                        width: MediaQuery.of(context).size.width * .26,
                         fit: BoxFit.fill,
                         placeholder: (_, __) =>
                             const Center(child: LoadingWidget()),
@@ -43,9 +50,16 @@ class BuildUpMovie extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                          onTap: () {},
-                          child: const Image(
-                              image: AssetImage('assets/images/bookmark.png'))),
+                          onTap: () {
+                            setState(() {
+                              if (urlM == "assets/images/bookmark.png") {
+                                urlM = "assets/images/bookmark_selected.png";
+                              } else {
+                                urlM = "assets/images/bookmark.png";
+                              }
+                            });
+                          },
+                          child: Image(image: AssetImage(urlM))),
                     ])),
               ),
             ],

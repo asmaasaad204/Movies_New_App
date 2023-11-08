@@ -1,14 +1,14 @@
-import 'package:app_new_movies/data/model/movies_by_search_responses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/model/discover_movies_responses.dart';
 import '../../../widgets/loadeing_widget.dart';
 import '../../details_screen/datails_screen.dart';
 
-class BuildSearchMovie extends StatelessWidget {
-  Results resultsSear;
+class BuildMovieWidget extends StatelessWidget {
+  ResultsDisc genResults;
 
-  BuildSearchMovie({super.key, required this.resultsSear});
+  BuildMovieWidget({super.key, required this.genResults});
 
   String baseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -22,14 +22,14 @@ class BuildSearchMovie extends StatelessWidget {
           InkWell(
             onTap: () {
               Navigator.pushNamed(context, DetailsScreen.routeName,
-                  arguments: resultsSear.id.toString());
+                  arguments: genResults.id.toString());
             },
             child: Row(
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
-                    imageUrl: "$baseUrl${resultsSear.posterPath}",
+                    imageUrl: "$baseUrl${genResults.posterPath}",
                     height: MediaQuery.of(context).size.height * .20,
                     width: MediaQuery.of(context).size.width * .35,
                     placeholder: (context, url) {
@@ -59,7 +59,7 @@ class BuildSearchMovie extends StatelessWidget {
                         children: [
                           SizedBox(
                             width: 150,
-                            child: Text(resultsSear.title ?? "",
+                            child: Text(genResults.title ?? "",
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 16),
                                 softWrap: false,
@@ -71,7 +71,7 @@ class BuildSearchMovie extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "${DateTime.tryParse(resultsSear.releaseDate!)?.year ?? "".toString()}",
+                        "${DateTime.tryParse(genResults.releaseDate!)?.year ?? "".toString()}",
                         style: const TextStyle(
                             fontSize: 13,
                             color: Colors.white54,
@@ -89,7 +89,7 @@ class BuildSearchMovie extends StatelessWidget {
                             width: 4,
                           ),
                           Text(
-                            resultsSear.voteAverage!.toStringAsFixed(1),
+                            genResults.voteAverage!.toStringAsFixed(1),
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 13),
                           )

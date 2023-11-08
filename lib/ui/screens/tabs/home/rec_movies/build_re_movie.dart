@@ -1,13 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../data/model/recommended_movies_responses.dart';
 import '../../../../widgets/loadeing_widget.dart';
 import '../../../details_screen/datails_screen.dart';
 
-class BuildReMovie extends StatelessWidget {
+class BuildReMovie extends StatefulWidget {
   ResultsRec resultsRe;
 
   BuildReMovie({super.key, required this.resultsRe});
+
+  @override
+  State<BuildReMovie> createState() => _BuildReMovieState();
+}
+
+class _BuildReMovieState extends State<BuildReMovie> {
+  String urlM = "assets/images/bookmark.png";
 
   String baseUrl = "https://image.tmdb.org/t/p/w500";
 
@@ -16,7 +24,7 @@ class BuildReMovie extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, DetailsScreen.routeName,
-            arguments: resultsRe.id.toString());
+            arguments: widget.resultsRe.id.toString());
       },
       child: Column(
         children: [
@@ -33,8 +41,8 @@ class BuildReMovie extends StatelessWidget {
                         topLeft: Radius.circular(6)),
                     child: Stack(children: [
                       CachedNetworkImage(
-                        imageUrl: "$baseUrl${resultsRe.posterPath}",
-                        height: MediaQuery.of(context).size.height * .19,
+                        imageUrl: "$baseUrl${widget.resultsRe.posterPath}",
+                        height: MediaQuery.of(context).size.height * .18,
                         width: MediaQuery.of(context).size.width * .28,
                         fit: BoxFit.fill,
                         placeholder: (_, __) =>
@@ -45,9 +53,16 @@ class BuildReMovie extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                          onTap: () {},
-                          child: const Image(
-                              image: AssetImage('assets/images/bookmark.png'))),
+                          onTap: () {
+                            setState(() {
+                              if (urlM == "assets/images/bookmark.png") {
+                                urlM = "assets/images/bookmark_selected.png";
+                              } else {
+                                urlM = "assets/images/bookmark.png";
+                              }
+                            });
+                          },
+                          child: Image(image: AssetImage(urlM))),
                     ])),
               ),
             ],
@@ -58,8 +73,8 @@ class BuildReMovie extends StatelessWidget {
                   bottomRight: Radius.circular(6)),
               child: Container(
                 padding: const EdgeInsets.all(4),
-                width: 101,
-                height: 53.5,
+                width: MediaQuery.of(context).size.width * .28,
+                height: MediaQuery.of(context).size.height * .067,
                 color: const Color.fromARGB(255, 52, 53, 52),
                 child: Column(
                   children: [
@@ -71,7 +86,7 @@ class BuildReMovie extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          resultsRe.voteAverage!.toStringAsFixed(1),
+                          widget.resultsRe.voteAverage!.toStringAsFixed(1),
                           style: const TextStyle(
                               fontSize: 11,
                               color: Colors.white,
@@ -84,7 +99,7 @@ class BuildReMovie extends StatelessWidget {
                     ),
                     SizedBox(
                         width: 200,
-                        child: Text(resultsRe.title ?? "",
+                        child: Text(widget.resultsRe.title ?? "",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 color: Colors.white,
@@ -93,14 +108,12 @@ class BuildReMovie extends StatelessWidget {
                             maxLines: 1,
                             softWrap: false)),
                     const SizedBox(
-                      height: 2,
+                      height: 3,
                     ),
                     Row(
                       children: [
                         Text(
-                          DateTime.parse(resultsRe.releaseDate ?? "")
-                              .year
-                              .toString(),
+                          "${DateTime.tryParse(widget.resultsRe.releaseDate!)?.year ?? "".toString()}",
                           style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white,
@@ -110,7 +123,7 @@ class BuildReMovie extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          resultsRe.adult! ? "PG-3" : "R",
+                          widget.resultsRe.adult! ? "R" : "PG-3",
                           style: const TextStyle(
                               fontSize: 10,
                               color: Colors.white54,
