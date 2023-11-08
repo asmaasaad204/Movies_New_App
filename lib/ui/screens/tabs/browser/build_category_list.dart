@@ -1,23 +1,21 @@
 import 'dart:ui';
-
 import 'package:app_new_movies/data/repos/movies_repo/data_sources/online_data_sources.dart';
 import 'package:app_new_movies/ui/widgets/error_widget.dart';
 import 'package:app_new_movies/ui/widgets/loadeing_widget.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../data/model/genre_movies_responses.dart';
 
 class BuildCategoriesList extends StatefulWidget {
   static const routeName = "Browser Screen";
   Function onCategoryClick;
-
-  BuildCategoriesList(this.onCategoryClick, {super.key});
+  BuildCategoriesList(this.onCategoryClick ,{super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<BuildCategoriesList> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +35,16 @@ class _MyHomePageState extends State<BuildCategoriesList> {
       body: FutureBuilder(
         future: OnlineDataSources.getGenresList(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if(snapshot.hasData)
+          {
             return buildCategoriesList(snapshot.data!);
-          } else if (snapshot.hasError) {
+          }
+          else if(snapshot.hasError)
+          {
             return ErrorView(message: snapshot.error.toString());
-          } else {
+          }
+          else
+          {
             return const LoadingWidget();
           }
         },
@@ -49,7 +52,8 @@ class _MyHomePageState extends State<BuildCategoriesList> {
     );
   }
 
-  Widget buildCategoriesList(List<MovieGenres> genres) {
+  Widget buildCategoriesList(List<MovieGenres> genres)
+  {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: GridView.builder(
@@ -118,7 +122,7 @@ class _MyHomePageState extends State<BuildCategoriesList> {
                             child: Container(
                               child: Center(
                                 child: Text(
-                                  genres[index].name ?? "",
+                                  genres[index].name??"",
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,

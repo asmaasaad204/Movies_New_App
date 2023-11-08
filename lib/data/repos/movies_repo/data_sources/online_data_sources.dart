@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:app_new_movies/data/model/discover_movies_responses.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-
 import '../../../model/details_movie_responses.dart';
 import '../../../model/genre_movies_responses.dart';
 import '../../../model/movies_by_search_responses.dart';
@@ -100,15 +98,15 @@ class OnlineDataSources {
     throw Exception("Something went wrong...!");
   }
 
-  static Future<List<MovieGenres>> getGenresList() async {
+  static Future<List<MovieGenres>> getGenresList() async
+  {
     Uri url = Uri.https(baseUrl, genresListEndPoint);
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
-    GenresMovieListResponses genresMovieListResponses =
-        GenresMovieListResponses.fromJson(json);
-    if (response.statusCode >= 200 &&
-        response.statusCode < 300 &&
-        genresMovieListResponses.genres!.isNotEmpty == true) {
+    GenresMovieListResponses genresMovieListResponses = GenresMovieListResponses.fromJson(json);
+    if(response.statusCode >= 200 && response.statusCode < 300 &&
+        genresMovieListResponses.genres!.isNotEmpty == true)
+    {
       return genresMovieListResponses.genres!;
     }
     throw "Something went wrong please try again later...!";
@@ -133,7 +131,7 @@ class OnlineDataSources {
     Response response = await http.get(url, headers: headers);
     Map json = jsonDecode(response.body);
     DiscoverMoviesResponses discoverMoviesResponses =
-        DiscoverMoviesResponses.fromJson(json);
+    DiscoverMoviesResponses.fromJson(json);
     if (response.statusCode >= 200 &&
         response.statusCode < 300 &&
         id.isNotEmpty) {

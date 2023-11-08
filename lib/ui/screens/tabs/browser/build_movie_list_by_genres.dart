@@ -8,7 +8,6 @@ import '../../../widgets/loadeing_widget.dart';
 
 class BuildMovieListByGenresId extends StatelessWidget {
   String genresType;
-
   BuildMovieListByGenresId({super.key, required this.genresType});
 
   @override
@@ -16,11 +15,16 @@ class BuildMovieListByGenresId extends StatelessWidget {
     return FutureBuilder(
       future: OnlineDataSources.getMoviesBrowse(genresType),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if(snapshot.hasData)
+        {
           return buildMovie(snapshot.data!);
-        } else if (snapshot.hasError) {
+        }
+        else if(snapshot.hasError)
+        {
           return ErrorView(message: snapshot.error.toString());
-        } else {
+        }
+        else
+        {
           return const LoadingWidget();
         }
       },
