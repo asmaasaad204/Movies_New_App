@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           Home.routeName: (_) => Home(),
           BrowserScreen.routeName: (_) => const BrowserScreen(),
           SearchScreen.routeName: (_) => const SearchScreen(),
-          WatchListScreen.routeName: (_) => const WatchListScreen(),
+          WatchListScreen.routeName: (_) => WatchListScreen(),
           DetailsScreen.routeName: (_) => DetailsScreen(),
         },
         initialRoute: HomeScreen.routeName,

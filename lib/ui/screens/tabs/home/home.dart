@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../data/model/popular_movies_responses.dart';
 import '../../../widgets/error_widget.dart';
 import '../../../widgets/loadeing_widget.dart';
@@ -58,7 +59,10 @@ class _HomeState extends State<Home> {
             flex: 4,
             child: CarouselSlider(
                 items: results.map((movie) => buildPopMovie(movie)).toList(),
-                options: CarouselOptions(autoPlay: true, viewportFraction: 1,height: double.infinity))),
+                options: CarouselOptions(
+                    autoPlay: true,
+                    viewportFraction: 1,
+                    height: double.infinity))),
         //const SizedBox(height: 10,),
         Expanded(
           flex: 4,
@@ -136,7 +140,9 @@ class _HomeState extends State<Home> {
                 //mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 8,),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   Row(
                     children: [
                       SizedBox(
@@ -144,7 +150,8 @@ class _HomeState extends State<Home> {
                           child: Text(
                             movie.title ?? "",
                             style: const TextStyle(
-                              color: Colors.white, fontSize: 15,
+                              color: Colors.white,
+                              fontSize: 15,
                             ),
                             overflow: TextOverflow.fade,
                             softWrap: false,
@@ -158,9 +165,9 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "${DateTime.tryParse(movie.releaseDate!)?.year??"".toString()}",
-                        style:
-                        const TextStyle(color: Colors.white54, fontSize: 13),
+                        "${DateTime.tryParse(movie.releaseDate!)?.year ?? "".toString()}",
+                        style: const TextStyle(
+                            color: Colors.white54, fontSize: 13),
                       ),
                       const SizedBox(
                         width: 4,
@@ -182,7 +189,8 @@ class _HomeState extends State<Home> {
             borderRadius: BorderRadius.circular(5),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, DetailsScreen.routeName, arguments: movie.id.toString());
+                Navigator.pushNamed(context, DetailsScreen.routeName,
+                    arguments: movie.id.toString());
               },
               child: Stack(
                 children: [
@@ -191,24 +199,25 @@ class _HomeState extends State<Home> {
                     height: MediaQuery.of(context).size.height * .18,
                     width: MediaQuery.of(context).size.width * .27,
                     fit: BoxFit.fill,
-                    placeholder: (_, __) => const Center(child: LoadingWidget()),
+
+                    placeholder: (_, __) =>
+                        const Center(child: LoadingWidget()),
                     errorWidget: (_, __, ___) => const Icon(
                       Icons.error,
                       color: Color.fromRGBO(253, 174, 26, 1.0),
                     ),
                   ),
-                  InkWell(onTap: (){
-                    setState(() {
-                      if(urlM == "assets/images/bookmark.png")
-                      {
-                        urlM = "assets/images/bookmark_selected.png";
-                      }
-                      else
-                      {
-                        urlM = "assets/images/bookmark.png";
-                      }
-                    });
-                  },child: Image(image: AssetImage(urlM))),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (urlM == "assets/images/bookmark.png") {
+                            urlM = "assets/images/bookmark_selected.png";
+                          } else {
+                            urlM = "assets/images/bookmark.png";
+                          }
+                        });
+                      },
+                      child: Image(image: AssetImage(urlM))),
                 ],
               ),
             ),

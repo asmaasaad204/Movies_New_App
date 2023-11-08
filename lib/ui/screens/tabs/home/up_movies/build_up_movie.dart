@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../data/model/upcoming_movies_responses.dart';
 import '../../../../widgets/loadeing_widget.dart';
 import '../../../details_screen/datails_screen.dart';
@@ -20,7 +21,8 @@ class _BuildUpMovieState extends State<BuildUpMovie> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, DetailsScreen.routeName, arguments: widget.resultsUp.id.toString());
+        Navigator.pushNamed(context, DetailsScreen.routeName,
+            arguments: widget.resultsUp.id.toString());
       },
       child: Column(
         children: [
@@ -41,18 +43,17 @@ class _BuildUpMovieState extends State<BuildUpMovie> {
                         placeholder: (_, __) => const Center(child: LoadingWidget()),
                         errorWidget: (_, __, ___) => const Icon(Icons.error, color: Color.fromRGBO(253, 174, 26, 1.0),),
                       ),
-                      InkWell(onTap: (){
-                        setState(() {
-                          if(urlM == "assets/images/bookmark.png")
-                          {
-                            urlM = "assets/images/bookmark_selected.png";
-                          }
-                          else
-                          {
-                            urlM = "assets/images/bookmark.png";
-                          }
-                        });
-                      },child: Image(image: AssetImage(urlM))),
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (urlM == "assets/images/bookmark.png") {
+                                urlM = "assets/images/bookmark_selected.png";
+                              } else {
+                                urlM = "assets/images/bookmark.png";
+                              }
+                            });
+                          },
+                          child: Image(image: AssetImage(urlM))),
                     ])),
               ),
             ],

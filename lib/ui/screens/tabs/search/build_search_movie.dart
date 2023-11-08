@@ -1,6 +1,7 @@
 import 'package:app_new_movies/data/model/movies_by_search_responses.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../widgets/loadeing_widget.dart';
 import '../../details_screen/datails_screen.dart';
 

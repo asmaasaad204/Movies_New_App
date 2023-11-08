@@ -15,8 +15,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-  List<Widget> tabs = [Home(), const SearchScreen(), const BrowserScreen(), const WatchListScreen()];
+  List<Widget> tabs = [
+    Home(),
+    const SearchScreen(),
+    const BrowserScreen(),
+    WatchListScreen()
+  ];
   int currentIndex = 0;
 
   @override
@@ -50,7 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
             BottomNavigationBarItem(icon: Icon(Icons.movie), label: "Browse"),
-            BottomNavigationBarItem(icon: Icon(Icons.video_library_sharp), label: "WatchList"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.video_library_sharp), label: "WatchList"),
           ]),
     );
   }
