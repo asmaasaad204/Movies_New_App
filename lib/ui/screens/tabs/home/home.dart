@@ -14,7 +14,7 @@ import '../../details_screen/datails_screen.dart';
 class Home extends StatefulWidget {
   static const String routeName = "Home";
 
-  Home({super.key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();

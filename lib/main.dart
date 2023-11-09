@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           HomeScreen.routeName: (_) => const HomeScreen(),
-          Home.routeName: (_) => Home(),
+          Home.routeName: (_) => const Home(),
           BrowserScreen.routeName: (_) => const BrowserScreen(),
           SearchScreen.routeName: (_) => const SearchScreen(),
-          WatchListScreen.routeName: (_) => WatchListScreen(),
+          WatchListScreen.routeName: (_) => const WatchListScreen(),
           DetailsScreen.routeName: (_) => DetailsScreen(),
         },
         initialRoute: HomeScreen.routeName,
