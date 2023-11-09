@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../../../data/model/similar_movies_responses.dart';
 import '../../../widgets/loadeing_widget.dart';
@@ -47,10 +48,12 @@ class _BuildSimMovieState extends State<BuildSimMovie> {
                         setState(() {
                           if(urlM == "assets/images/bookmark.png")
                           {
+                            saveMovies(widget.simResults);
                             urlM = "assets/images/bookmark_selected.png";
                           }
                           else
                           {
+                            deleteMovies(widget.simResults);
                             urlM = "assets/images/bookmark.png";
                           }
                         });
@@ -91,5 +94,19 @@ class _BuildSimMovieState extends State<BuildSimMovie> {
         ],
       ),
     );
+  }
+
+  saveMovies(ResultsSim resultsSim)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsSim.id.toString());
+    documentReference.set(resultsSim.toJson());
+  }
+
+  deleteMovies(ResultsSim resultsSim)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsSim.id.toString());
+    documentReference.delete();
   }
 }
