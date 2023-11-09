@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../data/model/recommended_movies_responses.dart';
@@ -47,11 +48,13 @@ class _BuildReMovieState extends State<BuildReMovie> {
                             253, 174, 26, 1.0),),
                       ),
                       InkWell(
-                          onTap: () {
+                          onTap: () async{
                             setState(() {
                               if (urlM == "assets/images/bookmark.png") {
+                                saveMovies(widget.resultsRe);
                                 urlM = "assets/images/bookmark_selected.png";
                               } else {
+                                deleteMovies(widget.resultsRe);
                                 urlM = "assets/images/bookmark.png";
                               }
                             });
@@ -125,9 +128,24 @@ class _BuildReMovieState extends State<BuildReMovie> {
                     )
                   ],
                 ),
-              ))
+              )
+          )
         ],
       ),
     );
+  }
+
+  saveMovies(ResultsRec resultsRec)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsRec.id.toString());
+    documentReference.set(resultsRec.toJson());
+  }
+
+  deleteMovies(ResultsRec resultsRec)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsRec.id.toString());
+    documentReference.delete();
   }
 }

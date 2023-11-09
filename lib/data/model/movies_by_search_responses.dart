@@ -1,3 +1,5 @@
+import 'package:app_new_movies/data/model/popular_movies_responses.dart';
+
 class MoviesBySearchResponses {
   MoviesBySearchResponses({
     this.page,
@@ -35,7 +37,7 @@ class MoviesBySearchResponses {
 }
 
 class Results {
-  Results({
+  Results(List<ResultsPop> pop, {
     this.adult,
     this.backdropPath,
     this.genreIds,

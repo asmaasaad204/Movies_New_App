@@ -3,6 +3,7 @@ import 'package:app_new_movies/ui/screens/tabs/home/rec_movies/re_movie_list.dar
 import 'package:app_new_movies/ui/screens/tabs/home/up_movies/up_movie_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -211,8 +212,10 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         setState(() {
                           if (urlM == "assets/images/bookmark.png") {
+                            saveMovies(movie);
                             urlM = "assets/images/bookmark_selected.png";
                           } else {
+                            deleteMovies(movie);
                             urlM = "assets/images/bookmark.png";
                           }
                         });
@@ -225,5 +228,19 @@ class _HomeState extends State<Home> {
         )
       ],
     );
+  }
+
+  saveMovies(ResultsPop resultsPop)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsPop.id.toString());
+    documentReference.set(resultsPop.toJson());
+  }
+
+  deleteMovies(ResultsPop resultsPop)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsPop.id.toString());
+    documentReference.delete();
   }
 }

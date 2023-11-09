@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:app_new_movies/data/model/discover_movies_responses.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import '../../../model/details_movie_responses.dart';
@@ -27,6 +28,8 @@ class OnlineDataSources {
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmNhZWJmMGQxMzEwYzA4YmMyZjkxNjc1M2JmZjY1ZSIsInN1YiI6IjY1M2ZlYjBlZTg5NGE2MDBmZjE4MTFhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jotI1JAx-7oGhzLmK4xguL84xkcpLxfJ4dhKyHLJfT4',
     'accept': 'application/json',
   };
+
+  static List<ResultsRec> movies = [];
 
   Future<PopularMoviesResponses> getPopularMovies() async {
     Uri url = Uri.https(baseUrl, popularMoviesEndPoint);
@@ -138,5 +141,26 @@ class OnlineDataSources {
       return discoverMoviesResponses.results!;
     }
     throw Exception("Something went wrong...!");
+  }
+  
+  static Future<List<ResultsRec>> getMoviesFromFirebase() async
+  {
+    CollectionReference<ResultsRec> collectionReference = FirebaseFirestore.instance.collection("Movies").
+    withConverter(
+        fromFirestore: (snapshot, _) {
+          Map json = snapshot.data() as Map;
+          ResultsRec resultsRec = ResultsRec.fromJson(json);
+          return resultsRec;
+        },
+        toFirestore: (value, options) {
+          return value.toJson();
+        },
+    );
+    QuerySnapshot<ResultsRec> querySnapshot = await collectionReference.get();
+    List<QueryDocumentSnapshot<ResultsRec>> docs = querySnapshot.docs;
+    movies = docs.map((e) {
+      return e.data();
+    }).toList();
+    return movies;
   }
 }

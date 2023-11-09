@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../data/model/upcoming_movies_responses.dart';
@@ -47,8 +48,10 @@ class _BuildUpMovieState extends State<BuildUpMovie> {
                           onTap: () {
                             setState(() {
                               if (urlM == "assets/images/bookmark.png") {
+                                saveMovies(widget.resultsUp);
                                 urlM = "assets/images/bookmark_selected.png";
                               } else {
+                                deleteMovies(widget.resultsUp);
                                 urlM = "assets/images/bookmark.png";
                               }
                             });
@@ -61,5 +64,19 @@ class _BuildUpMovieState extends State<BuildUpMovie> {
         ],
       ),
     );
+  }
+
+  saveMovies(ResultsUp resultsUp)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsUp.id.toString());
+    documentReference.set(resultsUp.toJson());
+  }
+
+  deleteMovies(ResultsUp resultsUp)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(resultsUp.id.toString());
+    documentReference.delete();
   }
 }

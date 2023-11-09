@@ -1,5 +1,6 @@
 import 'package:app_new_movies/ui/screens/details_screen/similar_movies/similar_movie_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../../data/model/details_movie_responses.dart';
 import '../../../data/repos/movies_repo/data_sources/online_data_sources.dart';
@@ -135,8 +136,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               InkWell(
                                   onTap: () {
                                     setState(() {
+                                      saveMovies(detailsMovieResponses);
                                       if(urlM == "assets/images/bookmark.png")
                                       {
+                                        deleteMovies(detailsMovieResponses);
                                         urlM = "assets/images/bookmark_selected.png";
                                       }
                                       else
@@ -241,5 +244,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
         ],
       ),
     );
+  }
+
+  saveMovies(DetailsMovieResponses detailsMovieResponses)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(detailsMovieResponses.id.toString());
+    documentReference.set(detailsMovieResponses.toJson());
+  }
+
+  deleteMovies(DetailsMovieResponses detailsMovieResponses)
+  {
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("Movies");
+    DocumentReference documentReference = collectionReference.doc(detailsMovieResponses.id.toString());
+    documentReference.delete();
   }
 }
