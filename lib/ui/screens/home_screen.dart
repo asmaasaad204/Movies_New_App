@@ -4,6 +4,7 @@ import 'package:app_new_movies/ui/screens/tabs/search/search_screen.dart';
 import 'package:app_new_movies/ui/screens/tabs/watchlist/watch_list_screen.dart';
 import 'package:flutter/material.dart';
 
+
 class HomeScreen extends StatefulWidget {
   static const routeName = "Home Screen";
 
@@ -26,15 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 18, 19, 18),
-      bottomNavigationBar: buildBottomNavBar(),
+      bottomNavigationBar:buildBottomNavBar(),
       body: tabs[currentIndex],
     );
   }
 
-  Widget buildBottomNavBar() {
+  Widget buildBottomNavBar()
+  {
     return Theme(
-      data: Theme.of(context)
-          .copyWith(canvasColor: const Color.fromARGB(255, 26, 26, 26)),
+      data: Theme.of(context).copyWith(canvasColor: const Color.fromARGB(255, 26, 26, 26)),
       child: BottomNavigationBar(
           onTap: (index) {
             setState(() {

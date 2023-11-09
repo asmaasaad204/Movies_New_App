@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'dart:ui';
-
+import 'package:app_new_movies/ui/screens/tabs/browser/build_category_list.dart';
+import 'package:app_new_movies/ui/screens/tabs/browser/build_movie_list_by_genres.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class BrowserScreen extends StatefulWidget {
   static const routeName = "Browser Screen";
@@ -14,129 +12,36 @@ class BrowserScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<BrowserScreen> {
-  List<dynamic> genres = [];
+  late Widget currentWidget;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    fetchGenres();
-  }
-
-  Future<void> fetchGenres() async {
-    final response = await http.get(Uri.parse(
-        'https://api.themoviedb.org/3/genre/movie/list?api_key=8bcaebf0d1310c08bc2f916753bff65e'));
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      setState(() {
-        genres = data['genres'];
-      });
-    } else {
-      print('Failed to fetch genres');
-    }
+    currentWidget = BuildCategoriesList(onCategoryClick);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'Browse Category',
-          style: TextStyle(
-            fontSize: 23,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      backgroundColor: const Color(0xff121312),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 15),
-        child: GridView.builder(
-          itemCount: genres.length,
-          physics: const BouncingScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-          ),
-          itemBuilder: (context, index) {
-            List<String> imageNames = [
-              'assets/images/photo1.jpg',
-              'assets/images/Adventure.jpeg',
-              'assets/images/Animation.jpeg',
-              'assets/images/Comedy.jpeg',
-              'assets/images/Crime.jpeg',
-              'assets/images/Documentary.jpeg',
-              'assets/images/Drama.jpeg',
-              'assets/images/Family.jpeg',
-              'assets/images/Fantasy.jpeg',
-              'assets/images/History.jpeg',
-              'assets/images/Horror.jpeg',
-              'assets/images/Music.jpeg',
-              'assets/images/Mystery.jpeg',
-              'assets/images/Romance.jpeg',
-              'assets/images/Science Fiction.jpeg',
-              'assets/images/TV Movie.jpeg',
-              'assets/images/Thriller.jpeg',
-              'assets/images/War.jpeg',
-              'assets/images/Western.jpeg',
-            ];
-            return Padding(
-              padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
-              child: GridTile(
-                child: Stack(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        ///Click to another screen
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        width: 180,
-                        height: 170,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: AssetImage(
-                              imageNames[index],
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                        top: 5,
-                        bottom: 0,
-                        left: 7,
-                        right: 7,
-                        child: ClipRRect(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                            child: Container(
-                              child: Center(
-                                child: Text(
-                                  genres[index]['name'],
-                                  style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
+    return WillPopScope(
+        onWillPop: ()
+    {
+      if (currentWidget is! BuildCategoriesList) {
+        currentWidget = BuildCategoriesList(onCategoryClick);
+        setState(() {});
+        return Future.value(false);
+      }
+      else {
+        return Future.value(true);
+      }
+    },
+    child: currentWidget,);
+  }
+
+  onCategoryClick(String type)
+  {
+    setState(() {
+      currentWidget = BuildMovieListByGenresId(genresType: type);
+    });
   }
 }

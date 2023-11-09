@@ -28,29 +28,23 @@ class _BuildReMovieState extends State<BuildReMovie> {
       },
       child: Column(
         children: [
-          const SizedBox(
-            height: 18,
-          ),
+          const SizedBox(height: 18,),
           Row(
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(6),
-                        topLeft: Radius.circular(6)),
-                    child: Stack(children: [
+                    borderRadius: const BorderRadius.only(topRight: Radius.circular(6),topLeft: Radius.circular(6)),
+                    child:
+                    Stack(children: [
                       CachedNetworkImage(
                         imageUrl: "$baseUrl${widget.resultsRe.posterPath}",
                         height: MediaQuery.of(context).size.height * .18,
                         width: MediaQuery.of(context).size.width * .28,
                         fit: BoxFit.fill,
-                        placeholder: (_, __) =>
-                            const Center(child: LoadingWidget()),
-                        errorWidget: (_, __, ___) => const Icon(
-                          Icons.error,
-                          color: Color.fromRGBO(253, 174, 26, 1.0),
-                        ),
+                        placeholder: (_, __) => const Center(child: LoadingWidget()),
+                        errorWidget: (_, __, ___) => const Icon(Icons.error, color: Color.fromRGBO(
+                            253, 174, 26, 1.0),),
                       ),
                       InkWell(
                           onTap: () {
@@ -68,9 +62,7 @@ class _BuildReMovieState extends State<BuildReMovie> {
             ],
           ),
           ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(6),
-                  bottomRight: Radius.circular(6)),
+              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(6),bottomRight: Radius.circular(6)),
               child: Container(
                 padding: const EdgeInsets.all(4),
                 width: MediaQuery.of(context).size.width * .28,
@@ -80,7 +72,7 @@ class _BuildReMovieState extends State<BuildReMovie> {
                   children: [
                     Row(
                       children: [
-                        const Image(
+                const Image(
                             image: AssetImage('assets/images/Group 16.png')),
                         const SizedBox(
                           width: 4,

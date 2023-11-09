@@ -7,7 +7,6 @@ import '../../../details_screen/datails_screen.dart';
 
 class BuildUpMovie extends StatefulWidget {
   ResultsUp resultsUp;
-
   BuildUpMovie({super.key, required this.resultsUp});
 
   @override
@@ -27,27 +26,22 @@ class _BuildUpMovieState extends State<BuildUpMovie> {
       },
       child: Column(
         children: [
-          const SizedBox(
-            height: 18,
-          ),
+          const SizedBox(height: 18,),
           Row(
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(6),
-                    child: Stack(children: [
+                    child:
+                    Stack(children: [
                       CachedNetworkImage(
                         imageUrl: "$baseUrl${widget.resultsUp.posterPath}",
                         height: MediaQuery.of(context).size.height * .175,
                         width: MediaQuery.of(context).size.width * .26,
                         fit: BoxFit.fill,
-                        placeholder: (_, __) =>
-                            const Center(child: LoadingWidget()),
-                        errorWidget: (_, __, ___) => const Icon(
-                          Icons.error,
-                          color: Color.fromRGBO(253, 174, 26, 1.0),
-                        ),
+                        placeholder: (_, __) => const Center(child: LoadingWidget()),
+                        errorWidget: (_, __, ___) => const Icon(Icons.error, color: Color.fromRGBO(253, 174, 26, 1.0),),
                       ),
                       InkWell(
                           onTap: () {

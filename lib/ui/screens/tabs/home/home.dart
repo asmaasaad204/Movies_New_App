@@ -199,6 +199,7 @@ class _HomeState extends State<Home> {
                     height: MediaQuery.of(context).size.height * .18,
                     width: MediaQuery.of(context).size.width * .27,
                     fit: BoxFit.fill,
+
                     placeholder: (_, __) =>
                         const Center(child: LoadingWidget()),
                     errorWidget: (_, __, ___) => const Icon(
