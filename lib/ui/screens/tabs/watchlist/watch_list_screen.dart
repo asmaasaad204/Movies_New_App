@@ -1,4 +1,4 @@
-import 'package:app_new_movies/ui/screens/tabs/watchlist/buidl_watchlist.dart';
+import 'package:app_new_movies/ui/screens/tabs/watchlist/build_watchlist.dart';
 import 'package:flutter/material.dart';
 
 class WatchListScreen extends StatefulWidget {
